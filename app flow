@@ -1,0 +1,83 @@
+import time
+import speech_recognition as sr
+import face_recognition
+import cv2
+
+def detect_face(timeout=60):
+    """Detect a face within the given timeout period."""
+    video_capture = cv2.VideoCapture(0)
+    start_time = time.time()
+
+    while time.time() - start_time < timeout:
+        ret, frame = video_capture.read()
+        if not ret:
+            continue
+
+        face_locations = face_recognition.face_locations(frame)
+        if face_locations:
+            video_capture.release()
+            return True
+
+    video_capture.release()
+    return False
+
+def greet_user():
+    """Greet the user."""
+    print("Hello! How can I help?")
+
+def listen_for_response(timeout=30):
+    """Listen for a response from the user."""
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        recognizer.adjust_for_ambient_noise(source)
+        try:
+            audio = recognizer.listen(source, timeout=timeout)
+            response = recognizer.recognize_google(audio)
+            print(f"User said: {response}")
+            return response.lower()
+        except sr.UnknownValueError:
+            print("Sorry, I couldn't understand that.")
+            return None
+        except sr.RequestError:
+            print("Could not request results, please check your internet connection.")
+            return None
+
+def process_response(response):
+    """Process the response and decide what to do."""
+    if not response:
+        print("No valid response detected.")
+        return False
+
+    if "meeting" in response:
+        print("Scheduling a meeting...")
+        return True
+    elif "deep task" in response or "stranger mode" in response:
+        print("Entering deep task or stranger mode...")
+        return True
+    elif "repeat" in response:
+        print("Repeating the process...")
+        return True
+    else:
+        print("No matching command. Ending process.")
+        return False
+
+def main():
+    """Main loop implementing the flowchart."""
+    while True:
+        print("Sleeping...")
+        time.sleep(5)  # Simulate sleep mode
+
+        if not detect_face():
+            print("No face detected, continuing to sleep...")
+            continue
+
+        greet_user()
+        response = listen_for_response()
+
+        if not process_response(response):
+            print("Process completed. Going back to sleep...")
+            continue
+
+if __name__ == "__main__":
+    main()

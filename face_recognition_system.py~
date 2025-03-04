@@ -241,7 +241,7 @@ class FaceRecognition:
                             self.logger.info(f"Recognized: {name} with confidence {confidence:.1f}%")
 
                             # Voice announcement
-                            read_text_baidu(f"您好 {name}")
+                            read_text_baidu(f"Hello {name}")
                             # self.voice_queue.put(f"Hello {name}")
                             time.sleep(1)
 

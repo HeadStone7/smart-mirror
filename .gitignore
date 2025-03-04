@@ -1,0 +1,7 @@
+.env
+.dist
+known_faces/*
+logs
+temp_audio
+services/logs
+.venv
