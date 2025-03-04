@@ -72,6 +72,7 @@ if __name__ == "__main__":
             elif '空调' in text:
                 print("AC query detected")
             elif '拜拜' in text:
+                read_text_baidu("拜拜下次再见")
                 break
             else:
                 print("Deepseek request")

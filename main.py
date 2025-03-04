@@ -44,9 +44,9 @@ if __name__ == "__main__":
     location = get_user_location()
     weather = WeatherService()
     response = weather.get_weather_info(get_user_location().lng, get_user_location().lat)
-    print(response)
+
     while True:
-        if True:
+        if detect_face():
             time.sleep(2)
             read_text_baidu(f"我能为您做些什么？")
 
