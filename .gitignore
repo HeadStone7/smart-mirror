@@ -5,4 +5,14 @@ logs
 features/audio/temp_audio/*
 .venv
 app flow
+
+features/weather/__pycache__
+
+# Ignore Python cache directories
+__pycache__/
+*.py[cod]
+
+# Ignore backup files
 *~
+
+.idea
