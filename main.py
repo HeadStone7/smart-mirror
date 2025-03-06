@@ -33,17 +33,20 @@ def user_speech_recognition() -> str:
     return recognized_text
 
 
-def get_user_location():
+def get_user_location() :
     localization = geocoder.ip("me")
 
     return localization
 
 
-if __name__ == "__main__":
-    print(f"{get_user_location()}")
+def main() -> None:
+    # print(f"{get_user_location()}")
     location = get_user_location()
     weather = WeatherService()
-    response = weather.get_weather_info(get_user_location().lng, get_user_location().lat)
+    longitude = get_user_location().lng
+    latitude = get_user_location().lat
+
+    response = weather.get_weather_info(longitude, latitude)
     start_time = 60
 
     while True:
@@ -76,7 +79,6 @@ if __name__ == "__main__":
                 elif '几点' in text:
                     print("Time query detected")
                     read_text_baidu(f"现在是 {time.strftime('%H:%M')}")
-
                 elif '空调' in text:
                     print("AC query detected")
                 elif '拜拜' in text:
@@ -88,3 +90,7 @@ if __name__ == "__main__":
         else:
             read_text_baidu("我找不到你的脸，请换个姿势")
             print("Recognition failed")
+
+
+if __name__ == "__main__":
+    main()
