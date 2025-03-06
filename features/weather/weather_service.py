@@ -1,4 +1,4 @@
-from weather_api.api_client import APIClient
+from features.weather.api_client import APIClient
 
 
 class WeatherService:

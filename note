@@ -1,0 +1,16 @@
+#Note:
+#Before commit any work make sure to check  you don't commit unnecessary files/folder
+#To check your commit type:
+
+    git ls-tree --name-only HEAD
+
+#To delete unwanted files/folder type:
+
+    git rm -r <file/folder_name>
+
+#Then type:
+
+    git add .
+    git commit -m "commit message"
+    git push
+

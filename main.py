@@ -2,7 +2,7 @@ import geocoder
 from features.face_recognition.face_recognition_system import FaceRecognition
 from features.audio.speech_recognizer import RecognizeSpeech
 from features.common.utils import read_text_baidu
-from weather_api.weather_service import WeatherService
+from features.weather import WeatherService
 import time
 
 
