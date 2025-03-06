@@ -5,3 +5,4 @@ logs
 features/audio/temp_audio/*
 .venv
 app flow
+*~
