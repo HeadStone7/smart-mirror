@@ -55,11 +55,13 @@ class LoggerConfig:
     @staticmethod
     def handle_error(logger: logging.Logger, error_type: str, error_msg: str, exception: Exception = None) -> str:
         """统一的错误处理方法
+
         Args:
             logger: 日志记录器
             error_type: 错误类型
             error_msg: 错误信息
             exception: 异常对象（可选）
+
         Returns:
             str: 格式化的错误信息
         """

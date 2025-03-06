@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import List
 import time
 
-from utils import read_text_baidu
+from features.common.utils import read_text_baidu
 
 
 class FaceRecognition:

@@ -5,30 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc7870e6-9ee3-49d7-a444-b7b6f5632b36" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/known_faces/Joseph/Joseph.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/known_faces/Joseph/id.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logger_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logs/face_recognition_20250219.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logs/face_recognition_20250224.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logs/face_recognition_20250303.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logs/logs_20250303.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/speech_recognizer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/voice_feat_system.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_api/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_api/api_client.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_api/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_api/exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weather_api/weather_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mirror-magic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mirror-magic.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/features/audio/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/face_recognition_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/face_recognition_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/face_recognition_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/face_recognition/face_recognition_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/logger_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/speech_recognizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/audio/speech_recognizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/common/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voice_feat_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/features/audio/voice_feat_system.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,27 +41,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.SpeechRecognizer.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.face_recognition.executor": "Run",
-    "Python.index (1).executor": "Run",
-    "Python.index.executor": "Run",
-    "Python.local_speech_recognizer (1).executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.real-time-speech-recognition.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.voice_feat_system.executor": "Run",
-    "Python.weather_service.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Josh/PycharmProjects/smart-mirror",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.SpeechRecognizer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.face_recognition.executor&quot;: &quot;Run&quot;,
+    &quot;Python.index (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.index.executor&quot;: &quot;Run&quot;,
+    &quot;Python.local_speech_recognizer (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.real-time-speech-recognition.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.voice_feat_system.executor&quot;: &quot;Run&quot;,
+    &quot;Python.weather_service.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Josh/PycharmProjects/smart-mirror&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Josh\PycharmProjects\smart-mirror" />
@@ -85,8 +70,13 @@
       <recent name="C:\Users\Josh\PycharmProjects\mirror-magic\known_faces\Joe7" />
       <recent name="C:\Users\Josh\PycharmProjects\mirror-magic\known_faces\known_faces\Joe7.jpg" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Josh\PycharmProjects\smart-mirror\features\common" />
+      <recent name="C:\Users\Josh\PycharmProjects\smart-mirror\features\audio" />
+      <recent name="C:\Users\Josh\PycharmProjects\smart-mirror\features\face_recognition" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.main (1)">
+  <component name="RunManager" selected="Python.index">
     <configuration name="config" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="mirror-magic" />
       <option name="ENV_FILES" value="" />
@@ -188,7 +178,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Josh\PycharmProjects\smart-mirror\services\speech_recognizer.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Josh\PycharmProjects\smart-mirror\features\audio\speech_recognizer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -221,11 +211,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.index" />
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.weather_service" />
         <item itemvalue="Python.config" />
-        <item itemvalue="Python.local_speech_recognizer (1)" />
-        <item itemvalue="Python.index" />
       </list>
     </recent_temporary>
   </component>

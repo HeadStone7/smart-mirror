@@ -2,6 +2,6 @@
 .dist
 known_faces/*
 logs
-temp_audio
-services/logs
+features/audio/temp_audio/*
 .venv
+app flow
