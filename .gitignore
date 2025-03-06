@@ -9,7 +9,7 @@ app flow
 features/weather/__pycache__
 
 # Ignore Python cache directories
-__pycache__/
+__pycache__
 *.py[cod]
 
 # Ignore backup files
