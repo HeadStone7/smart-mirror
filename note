@@ -1,6 +1,6 @@
 #Note:
 #Before commit any work make sure to check  you don't commit unnecessary files/folder
-#To check your commit type:
+#To check your committed files/folders, please type:
 
     git ls-tree --name-only HEAD
 
