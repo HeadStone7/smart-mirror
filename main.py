@@ -81,7 +81,7 @@ def main() -> None:
                     read_text_baidu(f"现在是 {time.strftime('%H:%M')}")
                 elif '空调' in text:
                     print("AC query detected")
-                elif '拜拜' in text:
+                elif '拜拜' or '再见' in text:
                     read_text_baidu("拜拜下次再见")
                     break
                 else:

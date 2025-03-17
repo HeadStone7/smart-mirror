@@ -6,7 +6,7 @@
 
 #To delete unwanted files/folder type:
 
-    git rm -r <file/folder_name>
+    git rm -r --cached modules
 
 #Then type:
 
