@@ -44,7 +44,7 @@ class VoiceAssistant:
             self.speech_client = AipSpeech(baidu_app_id, baidu_api_key, baidu_secret_key)
 
         # Initialize DeepSeek API
-        self.deepseek_api_key = deepseek_api_key
+        self.deepseek_api_key = os.getenv('DEEPSEEK_API_KEY')
         self.deepseek_api_url = os.getenv('DEEPSEEK_API_URL')
 
         # Initialize TTS engine
@@ -401,11 +401,12 @@ class VoiceAssistant:
                 "model": "deepseek-chat",
                 "messages": [
                     {"role": "system",
-                     "content": "You are a friendly, professional AI assistant capable of understanding and responding to various user queries."},
+                     "content": "You are a friendly, professional AI assistant capable of understanding and "
+                                "responding to various user queries concisely and shortly."},
                     {"role": "user", "content": text}
                 ],
                 "temperature": 0.7,
-                "max_tokens": 1000
+                "max_tokens": 100
             }
 
             response = requests.post(
@@ -419,18 +420,29 @@ class VoiceAssistant:
                 result = response.json()
                 reply = result['choices'][0]['message']['content']
                 self.logger.info(f"Chat response received")
+
+                if reply:
+                    sentences = reply.split('.')
+                    shortened_reply = '.'.join(sentences[:1]) + '.' if len(sentences) > 2 else reply  # Keep the first 2 sentences
+                    return shortened_reply.strip()
                 return reply
             else:
                 self.logger.error(f"API request failed: {response.status_code}, {response.text}")
-                return "Sorry, I couldn't process your request. Please try again."
+                # return "Sorry, I couldn't process your request. Please try again."
+                return "抱歉，我无法将代码注释或内容翻译成中文。如果您需要技术帮助或代码修改，请告诉我！"
 
         except requests.exceptions.Timeout:
-            return "Sorry, the request timed out. Please try again."
+            # return "Sorry, the request timed out. Please try again."
+            return "抱歉，请求超时。请再试一次。"
         except requests.exceptions.ConnectionError:
-            return "Sorry, I'm having trouble connecting to the server."
+            # return "Sorry, I'm having trouble connecting to the server."
+            return "抱歉，我无法连接到服务器。"
         except Exception as e:
             self.logger.error(f"Chat processing error: {e}")
-            return "I encountered an error while processing your request."
+            # return "I encountered an error while processing your request."
+            return "处理您的请求时遇到错误。"
+
+
 
 
 def main():

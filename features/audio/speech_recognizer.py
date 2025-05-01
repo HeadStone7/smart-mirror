@@ -171,6 +171,16 @@ class RecognizeSpeech:
             str: Recognized text, or None if recognition fails
         """
         try:
+            # Check if the microphone is accessible
+            if not sr.Microphone.list_microphone_names():
+                self.logger.error("No microphone detected or accessible")
+                return None
+
+            # Check network connection for Baidu API
+            if not self._check_network_connection():
+                self.logger.error("Network unavailable for Baidu Speech Recognition")
+                return None
+
             with sr.Microphone() as source:
                 self.logger.info("Listening for speech...")
 
@@ -188,6 +198,9 @@ class RecognizeSpeech:
 
         except sr.WaitTimeoutError:
             self.logger.warning("Listening timed out, no speech detected")
+            return None
+        except OSError as e:
+            self.logger.error(f"Microphone access error: {e}")
             return None
         except Exception as e:
             self.logger.error(f"Speech recognition error: {e}")
