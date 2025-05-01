@@ -3,14 +3,11 @@ from flask import Flask
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 # from kivy.uix.webview import WebView  # Commented out the WebView import
-from kivy.clock import Clock
-from kivy.properties import StringProperty
 from kivy.uix.label import Label  # Added a basic UI element for now
-import sys
 import geocoder
 from features.face_recognition.face_recognition_system import FaceRecognition
 from features.common.utils import read_text_baidu, user_speech_recognition
-from features.audio.voice_feat_system import VoiceAssistant
+from features.voice_feat_system import VoiceAssistant
 from features.weather import WeatherService
 import time
 import threading
