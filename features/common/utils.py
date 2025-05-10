@@ -7,6 +7,7 @@ from pathlib import Path
 import playsound
 import cv2
 import speech_recognition as sr
+from features.audio.speech_recognizer import RecognizeSpeech
 
 load_dotenv()
 
@@ -132,3 +133,9 @@ def read_text_baidu(
         os.remove(temp_file)
     else:
         print("Error in speech synthesis:", result)
+
+
+def user_speech_recognition() -> str:
+    speech_recognition = RecognizeSpeech()
+    recognized_text = speech_recognition.recognize_from_microphone()
+    return recognized_text
