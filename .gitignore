@@ -7,11 +7,12 @@ features/audio/*
 app flow
 
 features/weather/__pycache__
+temp_audio/*
 
 # Ignore Python cache directories
 __pycache__
 *.py[cod]
-
+features/common/__pycache__/utils.cpython.cpython-321.pyc
 # Ignore backup files
 *~
 
