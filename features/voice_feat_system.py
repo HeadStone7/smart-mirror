@@ -401,8 +401,10 @@ class VoiceAssistant:
                 "model": "deepseek-chat",
                 "messages": [
                     {"role": "system",
-                     "content": "You are a friendly, professional AI assistant capable of understanding and "
-                                "responding to various user queries concisely and shortly."},
+                     "content": "You are a friendly, professional assistant named 小朋友 who provides concise "
+                                "responses under 30 words. For unclear or incomplete questions, "
+                                "politely ask for clarification in the user input language. Never mention your word "
+                                "count limit."},
                     {"role": "user", "content": text}
                 ],
                 "temperature": 0.7,

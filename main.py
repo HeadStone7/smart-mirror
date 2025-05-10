@@ -39,17 +39,30 @@ class MMWindow(QMainWindow):
         self.setCentralWidget(self.web)
 
 
-def detect_face(timeout=60) -> bool:
+# Global variable to store preloaded face data
+preloaded_face_data = None
+
+
+def preload_face_data():
+    """Preload face data into memory."""
     face_system = FaceRecognition()
     image_paths_by_person = load_known_faces_from_folder("known_faces")
-
     for person_name, image_paths in image_paths_by_person.items():
         face_system.add_new_person(person_name, image_paths)
+    return face_system
+
+
+def detect_face(timeout=60) -> bool:
+    """Detect a face using preloaded face data."""
+    global preloaded_face_data
+    if preloaded_face_data is None:
+        print("Error: Face data not preloaded.")
+        return False
 
     start_time = time.time()
     while time.time() - start_time < timeout and running:
         try:
-            recognized = face_system.start_recognition()
+            recognized = preloaded_face_data.start_recognition()
             if recognized:
                 print("Face detected")
                 return True
@@ -96,6 +109,7 @@ def assistant_mode():
 
             if '天气' in text:
                 print("Weather query detected")
+                print("Response: " + response['weather_condition'])
                 read_text_baidu(f"今天的天气状况如下,  位置:{location.city}")
                 read_text_baidu(f"天气：{response['weather_condition']}")
                 read_text_baidu(f"温度：{response['temperature']}")
@@ -106,24 +120,27 @@ def assistant_mode():
                 read_text_baidu(f"气压：{response['pressure']}")
                 read_text_baidu(f"能见度：{response['visibility']}")
                 read_text_baidu(f"云量：{response['cloud_coverage']}")
-
+                continue
             elif '几点' in text:
                 print("Time query detected")
                 read_text_baidu(f"现在是 {time.strftime('%H:%M')}")
+                continue
             elif '空调' in text:
                 print("AC query detected")
                 # Add your AC control logic here
                 read_text_baidu("好的，正在处理空调指令。")
+                continue
             elif '拜拜' in text or '再见' in text:
                 read_text_baidu("拜拜，下次再见！")
                 face_detected = False
-                break
+                continue
             else:
                 print("Deepseek request")
                 print(f"Heard: {text}, processing with DeepSeek...")
                 response = assistant.chat(text)
                 print(f"DeepSeek response: {response}")
                 read_text_baidu(response)
+                continue
         else:
             print("Listening for command...")
             time.sleep(1)  # Small delay while actively listening
@@ -188,9 +205,10 @@ def launch_gui():
 
 
 def main() -> None:
-    global running, assistant
+    global running, assistant, preloaded_face_data
     print("Smart Mirror started.")
 
+    # Initialize the voice assistant
     assistant = VoiceAssistant(
         baidu_app_id=os.getenv("BAIDU_APP_ID"),
         baidu_api_key=os.getenv("BAIDU_API_KEY"),
@@ -198,6 +216,8 @@ def main() -> None:
         deepseek_api_key=os.getenv("DEEPSEEK_API_KEY"),
     )
 
+    # Preload face data
+    preloaded_face_data = preload_face_data()
     gui_thread = threading.Thread(target=launch_gui)
     voice_thread = threading.Thread(target=wake_word_detection_loop)
 
