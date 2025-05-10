@@ -14,6 +14,7 @@ __pycache__
 
 # Ignore backup files
 *~
-
+*.wav
+*.mp3
 .idea
 note
