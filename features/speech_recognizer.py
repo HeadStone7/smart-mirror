@@ -261,4 +261,3 @@ class RecognizeSpeech:
             self.logger.error(f"Speech recognition processing error: {e}")
             return None
 
-
