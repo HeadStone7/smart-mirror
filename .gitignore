@@ -2,7 +2,7 @@
 .dist
 known_faces/*
 logs
-features/audio/*
+features/audio/temp_audio/*
 .venv
 app flow
 
@@ -16,7 +16,8 @@ __pycache__
 features/common/__pycache__/*
 # Ignore backup files
 *~
-
+*.wav
+*.mp3
 .idea
 note
 features/face_recognition/__pycache__/face_recognition_system.cpython-312.pyc
