@@ -12,9 +12,11 @@ temp_audio/*
 # Ignore Python cache directories
 __pycache__
 *.py[cod]
-features/common/__pycache__/utils.cpython.cpython-321.pyc
+*.pyc
+features/common/__pycache__/*
 # Ignore backup files
 *~
 
 .idea
 note
+features/face_recognition/__pycache__/face_recognition_system.cpython-312.pyc
