@@ -1,11 +1,6 @@
 import os
-from collections import defaultdict
-
-from flask import Flask
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtCore import QUrl
 import sys
+from flask import Flask, render_template
 import geocoder
 from features.face_recognition.face_recognition_system import FaceRecognition
 from features.common.utils import read_text_baidu, user_speech_recognition, record_audio_until_silence, audio_to_text, \
@@ -15,6 +10,11 @@ from features.weather import WeatherService
 import time
 import threading
 
+# Initialize Flask app
+app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+# Global flags and variables
 app = Flask(__name__)
 
 # Global flags and variables
@@ -27,16 +27,16 @@ face_detection_running = False
 face_detection_success = False
 
 
-class MMWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("SmartMirror Display")
-        self.setGeometry(100, 300, 1024, 768)
-        # Create web view widget
-        self.web = QWebEngineView(self)
-        self.web.setUrl(QUrl("http://localhost:8080"))
-        # self.web.setContextMenuPolicy(Qt.NoContextMenu) // disable right click
-        self.setCentralWidget(self.web)
+@app.route('/')
+def index():
+    """Serve the main interface"""
+    return render_template('index.html')
+
+
+@app.route('/test')
+def test():
+    """Test endpoint to verify Flask is running"""
+    return "Flask server is working!"
 
 
 # Global variable to store preloaded face data
@@ -60,6 +60,7 @@ def detect_face(timeout=60) -> bool:
         return False
 
     start_time = time.time()
+
     while time.time() - start_time < timeout and running:
         try:
             recognized = preloaded_face_data.start_recognition()
@@ -77,8 +78,12 @@ def detect_face(timeout=60) -> bool:
 
 
 def get_user_location():
-    localization = geocoder.ip("me")
-    return localization
+    """Get the user's location using geocoder"""
+    try:
+        return geocoder.ip("me")
+    except Exception as e:
+        print(f"Error getting location: {e}")
+        return None
 
 
 def assistant_mode():
@@ -198,10 +203,39 @@ def wake_word_detection_loop():
 
 
 def launch_gui():
-    qt_app = QApplication(sys.argv)
-    window = MMWindow()
-    window.show()
-    sys.exit(qt_app.exec())
+    """Try Kivy first, fall back to console mode"""
+    try:
+        # PyQt5 implementation
+        from PyQt5.QtWebEngineWidgets import QWebEngineView
+        from PyQt5.QtWidgets import QApplication
+        from PyQt5.QtCore import QUrl
+        import sys
+
+        app = QApplication(sys.argv)
+        web = QWebEngineView()
+        web.load(QUrl("http://localhost:8080"))
+        web.show()
+        sys.exit(app.exec_())
+
+    except ImportError:
+        try:
+            # Fallback to Kivy implementation
+            from kivy.app import App
+            from kivy.uix.label import Label
+
+            class SimpleApp(App):
+                def build(self):
+                    return Label(text='Display Error, your Smart Mirror is Running\nhttp://localhost:8080')
+
+            SimpleApp().run()
+
+        except ImportError:
+            # Final fallback to console mode
+            print("GUI frameworks not available - running in console mode")
+            print("Access the mirror at http://localhost:8080")
+            import time
+            while True:
+                time.sleep(1)
 
 
 def main() -> None:
@@ -219,10 +253,12 @@ def main() -> None:
     # Preload face data
     preloaded_face_data = preload_face_data()
     gui_thread = threading.Thread(target=launch_gui)
-    voice_thread = threading.Thread(target=wake_word_detection_loop)
 
+    # Start voice processing
+    voice_thread = threading.Thread(target=wake_word_detection_loop, daemon=True)
     voice_thread.start()
     gui_thread.start()
+
 
     try:
         while True:
